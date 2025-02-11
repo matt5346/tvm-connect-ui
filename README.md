@@ -10,6 +10,6 @@ To install the library, use npm or yarn:
 
 ## Usage Examples
 
-- [React](https://github.com/broxus/tvm-connect-ui/examples/react)
-- [Vue](https://github.com/broxus/tvm-connect-ui/examples/vue)
-- [Vanilla](https://github.com/broxus/tvm-connect-ui/examples/vanilla)
+- [React](https://github.com/broxus/tvm-connect-ui/blob/master/examples/react/src/App.tsx)
+- [Vue](https://github.com/broxus/tvm-connect-ui/blob/master/examples/vue/src/App.vue)
+- [Vanilla](https://github.com/broxus/tvm-connect-ui/blob/master/examples/vanilla/src/main.ts)
