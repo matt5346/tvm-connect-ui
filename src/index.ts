@@ -255,7 +255,7 @@ export class TvmConnectUI {
 
         const meta = getRecentConnectionMeta()
 
-        const providers = params.providers && params.providers.length > 0 ? params.providers : [sparxWallet]
+        const providers = params.providers && params.providers.length > 0 ? params.providers : [sparxWallet()]
 
         this.tvmWallet = new TvmWalletService({
             autoInit: true,

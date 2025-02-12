@@ -5,7 +5,7 @@ import EverWalletSvg from './icons/EverWallet.svg'
 import SparXWalletSvg from './icons/SparXWallet.svg'
 import VenomWalletSvg from './icons/VenomWallet.svg'
 
-export const sparxWallet: TvmWalletProviderConfig = {
+export const sparxWallet = (): TvmWalletProviderConfig => ({
     connector: new SparXWallet(),
     id: 'SparXWallet',
     info: {
@@ -24,9 +24,9 @@ export const sparxWallet: TvmWalletProviderConfig = {
         },
         name: 'SparX Wallet',
     },
-}
+})
 
-export const everWallet: TvmWalletProviderConfig = {
+export const everWallet = (): TvmWalletProviderConfig => ({
     connector: new EverWallet(),
     id: 'EverWallet',
     info: {
@@ -41,9 +41,9 @@ export const everWallet: TvmWalletProviderConfig = {
         },
         name: 'Ever Wallet',
     },
-}
+})
 
-export const venomWallet: TvmWalletProviderConfig = {
+export const venomWallet = (): TvmWalletProviderConfig => ({
     connector: new VenomWallet(),
     id: 'VenomWallet',
     info: {
@@ -62,7 +62,7 @@ export const venomWallet: TvmWalletProviderConfig = {
         },
         name: 'Venom Wallet',
     },
-}
+})
 
 function useUniversalLink(
     basePath: string,
