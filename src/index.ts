@@ -10,6 +10,7 @@ import { sparxWallet } from './providers'
 
 export * from './networks'
 export * from './providers'
+export * from './connections'
 
 type Params = {
     providers?: TvmWalletProviderConfig[]
