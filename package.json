@@ -1,6 +1,6 @@
 {
   "name": "@broxus/tvm-connect-ui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "UI wrapper for tvm connector",
   "license": "MIT",
   "main": "dist/index.cjs.js",
