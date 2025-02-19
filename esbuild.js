@@ -6,7 +6,6 @@ const { minifyTemplates, writeFiles } = require('esbuild-minify-templates');
 const baseTsConfig = {
     entryPoints: ['./src/index.ts'],
     bundle: true,
-    minify: true,
     treeShaking: true,
     write: false,
     plugins: [

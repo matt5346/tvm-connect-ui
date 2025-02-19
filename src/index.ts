@@ -2,7 +2,7 @@ import { html, nothing, render } from 'lit-html'
 import { ifDefined } from 'lit-html/directives/if-defined.js'
 import { classMap } from 'lit-html/directives/class-map.js'
 import { type AddNetwork, type Network, type Permissions, ProviderRpcClient } from 'everscale-inpage-provider'
-import { getRecentConnectionMeta, getTvmProviderPlatformLink, storeRecentConnectionMeta, type TvmWalletProviderConfig, TvmWalletService } from "@broxus/tvm-connect/lib"
+import { getRecentConnectionMeta, getTvmProviderPlatformLink, storeRecentConnectionMeta, type TvmWalletProviderConfig, TvmWalletService } from "@broxus/tvm-connect"
 import { autorun, makeAutoObservable, reaction, runInAction } from "mobx"
 import { getUserAgent, isMobile } from '@broxus/js-utils'
 
@@ -28,6 +28,7 @@ export type TvmConnectState = {
     isUnsupportedNetwork: boolean
     isPopupVisible: boolean
     isNotInstalled: boolean
+    isInitializing: boolean
 }
 
 export class TvmConnectUI {
@@ -449,6 +450,7 @@ export class TvmConnectUI {
             isLoading: this.isLoading,
             isUnsupportedNetwork: this.isUnsupportedNetwork,
             isPopupVisible: this.visible,
+            isInitializing: this.tvmWallet.isInitializing === true,
             isNotInstalled: Object.values(this.isInitializing).every(item => item === false)
                 && Object.values(this.hasProvider).every(item => item === false)
         }
