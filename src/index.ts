@@ -2,7 +2,7 @@ import { html, nothing, render } from 'lit-html'
 import { ifDefined } from 'lit-html/directives/if-defined.js'
 import { classMap } from 'lit-html/directives/class-map.js'
 import { type AddNetwork, type Network, type Permissions, ProviderRpcClient } from 'everscale-inpage-provider'
-import { getRecentConnectionMeta, getTvmProviderPlatformLink, storeRecentConnectionMeta, type TvmWalletProviderConfig, TvmWalletService } from "@broxus/tvm-connect"
+import { getRecentConnectionMeta, getTvmProviderPlatformLink, storeRecentConnectionMeta, type TvmWalletProviderConfig, TvmWalletService } from "@broxus/tvm-connect/lib"
 import { autorun, makeAutoObservable, reaction, runInAction } from "mobx"
 import { getUserAgent, isMobile } from '@broxus/js-utils'
 
