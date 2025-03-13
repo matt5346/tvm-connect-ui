@@ -5,6 +5,9 @@ import { type AddNetwork, type Network, type Permissions, ProviderRpcClient } fr
 import {
     getRecentConnectionMeta,
     getTvmProviderPlatformLink,
+    isEverWalletBrowser,
+    isSparXWalletBrowser,
+    isVenomWalletBrowser,
     storeRecentConnectionMeta,
     type TvmWalletProviderConfig,
     TvmWalletService,
@@ -12,7 +15,7 @@ import {
 import { autorun, makeAutoObservable, reaction, runInAction } from 'mobx'
 import { getUserAgent, isMobile } from '@broxus/js-utils'
 
-import { sparxWallet } from './providers'
+import { everWallet, sparxWallet, venomWallet } from './providers'
 
 export * from './networks'
 export * from './providers'
@@ -275,12 +278,38 @@ export class TvmConnectUI {
 
         const meta = getRecentConnectionMeta()
 
-        const providers = params.providers && params.providers.length > 0 ? params.providers : [sparxWallet()]
+        const userAgent = getUserAgent()
+        const everWalletInstance = everWallet()
+        const sparxWalletInstance = sparxWallet()
+        const venomWalletInstance = venomWallet()
+
+        let providers: TvmWalletProviderConfig[] = []
+        let providerId: string | undefined = ''
+        if (isEverWalletBrowser(userAgent)) {
+            providerId = everWalletInstance.id
+            providers.push(everWalletInstance)
+        }
+
+        if (isSparXWalletBrowser(userAgent)) {
+            providerId = sparxWalletInstance.id
+            providers.push(sparxWalletInstance)
+        }
+
+        if (isVenomWalletBrowser(userAgent)) {
+            providerId = venomWalletInstance.id
+            providers.push(venomWalletInstance)
+        }
+
+        if (!providers.length) {
+            const paramsProviders = params.providers
+            providerId = paramsProviders?.length === 1 ? paramsProviders[0].id : meta?.providerId
+            providers = paramsProviders?.length ? paramsProviders : [sparxWalletInstance]
+        }
 
         this.tvmWallet = new TvmWalletService({
             autoInit: true,
             providers,
-            providerId: providers.length === 1 ? providers[0].id : meta?.providerId,
+            providerId,
         })
 
         this.hasProvider = Object.fromEntries(this.tvmWallet.providers.map(item => [item.id, false]))
