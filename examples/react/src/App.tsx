@@ -4,7 +4,7 @@ import '@broxus/tvm-connect-ui/dist/styles.css'
 import './App.css'
 
 const tvmConnectUI = new TvmConnectUI({
-    providers: [sparxWallet(), everWallet(), venomWallet()],
+    providers: [sparxWallet, everWallet, venomWallet],
     networks: [everscaleNetwork],
 })
 
