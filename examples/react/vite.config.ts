@@ -4,5 +4,5 @@ import { nekotonWasmVite } from 'nekoton-wasm-vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), nekotonWasmVite()],
+    plugins: [react(), nekotonWasmVite()],
 })
