@@ -278,24 +278,24 @@ export class TvmConnectUI {
 
         const meta = getRecentConnectionMeta()
 
-        const userAgent = getUserAgent()
-        const everWalletInstance = everWallet()
-        const sparxWalletInstance = sparxWallet()
-        const venomWalletInstance = venomWallet()
-
         let providers: TvmWalletProviderConfig[] = []
         let providerId: string | undefined = ''
+        const userAgent = getUserAgent()
+
         if (isEverWalletBrowser(userAgent)) {
+            const everWalletInstance = everWallet()
             providerId = everWalletInstance.id
             providers.push(everWalletInstance)
         }
 
         if (isSparXWalletBrowser(userAgent)) {
+            const sparxWalletInstance = sparxWallet()
             providerId = sparxWalletInstance.id
             providers.push(sparxWalletInstance)
         }
 
         if (isVenomWalletBrowser(userAgent)) {
+            const venomWalletInstance = venomWallet()
             providerId = venomWalletInstance.id
             providers.push(venomWalletInstance)
         }
@@ -303,7 +303,7 @@ export class TvmConnectUI {
         if (!providers.length) {
             const paramsProviders = params.providers
             providerId = paramsProviders?.length === 1 ? paramsProviders[0].id : meta?.providerId
-            providers = paramsProviders?.length ? paramsProviders : [sparxWalletInstance]
+            providers = paramsProviders?.length ? paramsProviders : [sparxWallet()]
         }
 
         this.tvmWallet = new TvmWalletService({
