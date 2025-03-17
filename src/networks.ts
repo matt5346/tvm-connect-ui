@@ -5,7 +5,7 @@ export const everscaleNetwork: AddNetwork = {
         type: 'jrpc',
         data: {
             endpoint: 'https://jrpc.everwallet.net',
-        }
+        },
     },
     name: 'Everscale',
     networkId: 42,
@@ -13,7 +13,7 @@ export const everscaleNetwork: AddNetwork = {
         symbol: 'EVER',
         explorerBaseUrl: 'https://everscan.io',
         tokensManifestUrl: 'https://raw.githubusercontent.com/broxus/ton-assets/master/manifest.json',
-    }
+    },
 }
 
 export const venomNetwork: AddNetwork = {
@@ -21,7 +21,7 @@ export const venomNetwork: AddNetwork = {
         type: 'jrpc',
         data: {
             endpoint: 'https://jrpc.venom.foundation',
-        }
+        },
     },
     name: 'Everscale',
     networkId: 1,
@@ -37,7 +37,7 @@ export const hamsterNetwork: AddNetwork = {
         type: 'proto',
         data: {
             endpoint: 'https://rpc.hamster.network',
-        }
+        },
     },
     name: 'Hamster Network',
     networkId: 7,
@@ -53,7 +53,7 @@ export const tychoTestnetNetwork: AddNetwork = {
         type: 'proto',
         data: {
             endpoint: 'https://rpc-testnet.tychoprotocol.com/proto',
-        }
+        },
     },
     name: 'Tycho Testnet',
     networkId: 2000,
@@ -69,7 +69,7 @@ export const tonNetwork: AddNetwork = {
         type: 'jrpc',
         data: {
             endpoint: 'https://jrpc-ton.broxus.com',
-        }
+        },
     },
     name: 'TON',
     networkId: -239,

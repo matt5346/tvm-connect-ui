@@ -1,12 +1,13 @@
 # TVMConnectUI
 
-A library for connecting to the [everscale-inpage-provider](https://github.com/broxus/everscale-inpage-provider), providing an easy interface to interact with the TVM blockchain via a browser wallet.
+A library for connecting to the [everscale-inpage-provider](https://github.com/broxus/everscale-inpage-provider),
+providing an easy interface to interact with the TVM blockchain via a browser wallet.
 
 ## Installation
 
 To install the library, use npm or yarn:
 
-```npm install @broxus/tvm-connect-ui```
+`npm install @broxus/tvm-connect-ui`
 
 ## Usage Examples
 
