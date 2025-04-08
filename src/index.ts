@@ -303,7 +303,7 @@ export class TvmConnectUI {
         if (!providers.length) {
             const paramsProviders = params.providers
             providerId = paramsProviders?.length === 1 ? paramsProviders[0].id : meta?.providerId
-            providers = paramsProviders?.length ? paramsProviders : [sparxWallet()]
+            providers = paramsProviders?.length ? paramsProviders : [sparxWallet(), everWallet(), venomWallet()]
         }
 
         this.tvmWallet = new TvmWalletService({
