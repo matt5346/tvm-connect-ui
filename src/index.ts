@@ -505,7 +505,11 @@ export class TvmConnectUI {
         } else {
             const provider = this.tvmWallet.providers.at(0)
             if (provider) {
-                this.selectProvider(provider.id)
+                if (provider.connector.provider) {
+                    this.selectProvider(provider.id)
+                } else {
+                    this.show()
+                }
             } else {
                 console.warn('Provider must be defined')
             }
