@@ -303,7 +303,7 @@ export class TvmConnectUI {
         if (!providers.length) {
             const paramsProviders = params.providers
             providerId = paramsProviders?.length === 1 ? paramsProviders[0].id : meta?.providerId
-            providers = paramsProviders?.length ? paramsProviders : [sparxWallet()]
+            providers = paramsProviders?.length ? paramsProviders : [sparxWallet(), everWallet(), venomWallet()]
         }
 
         this.tvmWallet = new TvmWalletService({
@@ -505,7 +505,11 @@ export class TvmConnectUI {
         } else {
             const provider = this.tvmWallet.providers.at(0)
             if (provider) {
-                this.selectProvider(provider.id)
+                if (provider.connector.provider) {
+                    this.selectProvider(provider.id)
+                } else {
+                    this.show()
+                }
             } else {
                 console.warn('Provider must be defined')
             }
