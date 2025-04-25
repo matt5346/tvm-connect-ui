@@ -17,9 +17,7 @@ import { getUserAgent, isMobile } from '@broxus/js-utils'
 
 import { everWallet, sparxWallet, venomWallet } from './providers'
 
-export * from './networks'
 export * from './providers'
-export * from './connections'
 
 type Params = {
     providers?: TvmWalletProviderConfig[]

@@ -5,7 +5,7 @@ const { sassPlugin } = require('esbuild-sass-plugin')
 const { minifyTemplates, writeFiles } = require('esbuild-minify-templates')
 
 const baseTsConfig = {
-    entryPoints: ['./src/index.ts'],
+    entryPoints: ['./src/index.ts', './src/connections.ts', './src/networks.ts'],
     bundle: true,
     minify: true,
     treeShaking: true,
@@ -25,30 +25,31 @@ const baseTsConfig = {
     },
 }
 
-Promise.all([
-    esbuild.build({
-        entryPoints: ['./src/styles.scss'],
-        minify: true,
-        plugins: [sassPlugin()],
-        outfile: 'dist/styles.css',
-    }),
-    esbuild
-        .build({
-            ...baseTsConfig,
-            format: 'esm',
-            outfile: 'dist/index.esm.js',
-        })
-        .then(result => {
-            fs.writeFileSync('./buildmeta.json', JSON.stringify(result.metafile, null, 2))
-            fs.unlinkSync('./dist/index.esm.css')
-        }),
-    esbuild
-        .build({
-            ...baseTsConfig,
-            format: 'cjs',
-            outfile: 'dist/index.cjs.js',
-        })
-        .then(() => {
-            fs.unlinkSync('./dist/index.cjs.css')
-        }),
-]).catch(() => process.exit(1))
+esbuild.build({
+    entryPoints: ['./src/styles.scss'],
+    minify: true,
+    plugins: [sassPlugin()],
+    outfile: 'dist/styles.css',
+})
+
+esbuild
+    .build({
+        ...baseTsConfig,
+        format: 'esm',
+        outdir: 'dist/esm'
+    })
+    .then(result => {
+        fs.writeFileSync('./buildmeta.json', JSON.stringify(result.metafile, null, 2))
+        fs.unlinkSync('./dist/esm/index.css')
+    })
+
+
+esbuild
+    .build({
+        ...baseTsConfig,
+        format: 'cjs',
+        outdir: 'dist/cjs'
+    })
+    .then(() => {
+        fs.unlinkSync('./dist/cjs/index.css')
+    })
