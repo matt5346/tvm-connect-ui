@@ -5,6 +5,8 @@ import EverWalletSvg from './icons/EverWallet.svg'
 import SparXWalletSvg from './icons/SparXWallet.svg'
 import VenomWalletSvg from './icons/VenomWallet.svg'
 
+export type { TvmWalletProviderConfig } from '@broxus/tvm-connect/lib';
+
 export const sparxWallet = (): TvmWalletProviderConfig => ({
     connector: new SparXWallet(),
     id: 'SparXWallet',
