@@ -5,10 +5,10 @@ import EverWalletSvg from './icons/EverWallet.svg'
 import SparXWalletSvg from './icons/SparXWallet.svg'
 import VenomWalletSvg from './icons/VenomWallet.svg'
 
-export type { TvmWalletProviderConfig } from '@broxus/tvm-connect/lib';
+export type { TvmWalletProviderConfig } from '@broxus/tvm-connect/lib'
 
-export const sparxWallet = (): TvmWalletProviderConfig => ({
-    connector: new SparXWallet(),
+export const sparxWallet = (fallbackAttemptsCount?: number): TvmWalletProviderConfig => ({
+    connector: new SparXWallet({ fallbackAttempts: fallbackAttemptsCount ?? 1 }),
     id: 'SparXWallet',
     info: {
         description: 'Your universal tool for TVM',
@@ -28,8 +28,8 @@ export const sparxWallet = (): TvmWalletProviderConfig => ({
     },
 })
 
-export const everWallet = (): TvmWalletProviderConfig => ({
-    connector: new EverWallet(),
+export const everWallet = (fallbackAttemptsCount?: number): TvmWalletProviderConfig => ({
+    connector: new EverWallet({ fallbackAttempts: fallbackAttemptsCount ?? 1 }),
     id: 'EverWallet',
     info: {
         description: 'Premier wallet for the Everscale',
@@ -45,8 +45,8 @@ export const everWallet = (): TvmWalletProviderConfig => ({
     },
 })
 
-export const venomWallet = (): TvmWalletProviderConfig => ({
-    connector: new VenomWallet(),
+export const venomWallet = (fallbackAttemptsCount?: number): TvmWalletProviderConfig => ({
+    connector: new VenomWallet({ fallbackAttempts: fallbackAttemptsCount ?? 1 }),
     id: 'VenomWallet',
     info: {
         description: 'Safe, reliable, and 100% yours',
