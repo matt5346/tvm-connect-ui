@@ -3,6 +3,9 @@
 A library for connecting to the [everscale-inpage-provider](https://github.com/broxus/everscale-inpage-provider),
 providing an easy interface to interact with the TVM blockchain via a browser wallet.
 
+## Node version 
+- ^20
+
 ## Installation
 
 To install the library, use npm or yarn:
