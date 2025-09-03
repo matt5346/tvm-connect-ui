@@ -10,7 +10,7 @@ import {
     isVenomWalletBrowser,
     storeRecentConnectionMeta,
     type TvmWalletProviderConfig,
-    TvmWalletService,
+    TvmConnectService,
 } from '@broxus/tvm-connect/lib'
 import { autorun, makeAutoObservable, reaction, runInAction } from 'mobx'
 import { getUserAgent, isMobile } from '@broxus/js-utils'
@@ -40,9 +40,9 @@ export class TvmConnectUI {
     protected itemTemplate = (provider: TvmWalletProviderConfig) => {
         const hasProvider = this.hasProvider[provider.id]
         const isInitializing = this.isInitializing[provider.id]
-        const homepage = provider.info.links?.homepage
-        const universalLink = provider.info.links?.universalLink
-        const [_, uri] = getTvmProviderPlatformLink({ ...provider.info.links }) ?? []
+        const homepage = provider?.info?.links?.homepage
+        const universalLink = provider?.info?.links?.universalLink
+        const [_, uri] = getTvmProviderPlatformLink({ ...provider?.info?.links }) ?? []
         const meta = getRecentConnectionMeta()
 
         return html`
@@ -54,13 +54,13 @@ export class TvmConnectUI {
                               'tvm-connect-ui-item-disabled': true,
                           })}
                       >
-                          ${provider.info.icon
+                          ${provider?.info?.icon
                               ? html`
-                                    <img class="tvm-connect-ui-item-icon" src=${provider.info.icon} alt="" />
+                                    <img class="tvm-connect-ui-item-icon" src=${provider?.info?.icon} alt="" />
                                 `
                               : null}
                           <div class="tvm-connect-ui-item-info">
-                              <div class="tvm-connect-ui-item-name">${provider.info.name}</div>
+                              <div class="tvm-connect-ui-item-name">${provider?.info?.name}</div>
                               <div class="tvm-connect-ui-item-desc">Initializing...</div>
                           </div>
                       </button>
@@ -68,16 +68,16 @@ export class TvmConnectUI {
                 : this.isMobile && !hasProvider && universalLink
                   ? html`
                         <a target="_blank" rel="noopener noreferrer" class="tvm-connect-ui-item" href=${universalLink}>
-                            ${provider.info.icon
+                            ${provider?.info?.icon
                                 ? html`
-                                      <img class="tvm-connect-ui-item-icon" src=${provider.info.icon} alt="" />
+                                      <img class="tvm-connect-ui-item-icon" src=${provider?.info?.icon} alt="" />
                                   `
                                 : null}
                             <div class="tvm-connect-ui-item-info">
-                                <div class="tvm-connect-ui-item-name">${provider.info.name}</div>
-                                ${provider.info.description
+                                <div class="tvm-connect-ui-item-name">${provider?.info?.name}</div>
+                                ${provider?.info?.description
                                     ? html`
-                                          <div class="tvm-connect-ui-item-desc">${provider.info.description}</div>
+                                          <div class="tvm-connect-ui-item-desc">${provider?.info?.description}</div>
                                       `
                                     : null}
                             </div>
@@ -94,16 +94,16 @@ export class TvmConnectUI {
                               })}
                               href=${ifDefined(uri ?? homepage)}
                           >
-                              ${provider.info.icon
+                              ${provider?.info?.icon
                                   ? html`
-                                        <img class="tvm-connect-ui-item-icon" src=${provider.info.icon} alt="" />
+                                        <img class="tvm-connect-ui-item-icon" src=${provider?.info?.icon} alt="" />
                                     `
                                   : null}
                               <div class="tvm-connect-ui-item-info">
-                                  <div class="tvm-connect-ui-item-name">Install ${provider.info.name}</div>
-                                  ${provider.info.description
+                                  <div class="tvm-connect-ui-item-name">Install ${provider?.info?.name}</div>
+                                  ${provider?.info?.description
                                       ? html`
-                                            <div class="tvm-connect-ui-item-desc">${provider.info.description}</div>
+                                            <div class="tvm-connect-ui-item-desc">${provider?.info?.description}</div>
                                         `
                                       : null}
                               </div>
@@ -111,16 +111,16 @@ export class TvmConnectUI {
                       `
                     : html`
                           <button class="tvm-connect-ui-item" @click=${this.selectProvider.bind(this, provider.id)}>
-                              ${provider.info.icon
+                              ${provider?.info?.icon
                                   ? html`
-                                        <img class="tvm-connect-ui-item-icon" src=${provider.info.icon} alt="" />
+                                        <img class="tvm-connect-ui-item-icon" src=${provider?.info?.icon} alt="" />
                                     `
                                   : null}
                               <div class="tvm-connect-ui-item-info">
-                                  <div class="tvm-connect-ui-item-name">${provider.info.name}</div>
-                                  ${provider.info.description
+                                  <div class="tvm-connect-ui-item-name">${provider?.info?.name}</div>
+                                  ${provider?.info?.description
                                       ? html`
-                                            <div class="tvm-connect-ui-item-desc">${provider.info.description}</div>
+                                            <div class="tvm-connect-ui-item-desc">${provider?.info?.description}</div>
                                         `
                                       : null}
                               </div>
@@ -164,14 +164,14 @@ export class TvmConnectUI {
             </button>
             <div class="tvm-connect-ui-provider">
                 <div class="tvm-connect-ui-provider-info">
-                    ${this.selectedProvider.info.icon
+                    ${this.selectedProvider?.info?.icon
                         ? html`
-                              <img class="tvm-connect-ui-provider-icon" src=${this.selectedProvider.info.icon} alt="" />
+                              <img class="tvm-connect-ui-provider-icon" src=${this.selectedProvider?.info?.icon} alt="" />
                           `
                         : null}
-                    ${this.selectedProvider.info.description
+                    ${this.selectedProvider?.info?.description
                         ? html`
-                              <div class="tvm-connect-ui-provider-desc">${this.selectedProvider.info.description}</div>
+                              <div class="tvm-connect-ui-provider-desc">${this.selectedProvider?.info?.description}</div>
                           `
                         : null}
                 </div>
@@ -180,7 +180,7 @@ export class TvmConnectUI {
                     ? html`
                           <div class="tvm-connect-ui-provider-status">
                               <div class="tvm-connect-ui-provider-hint">
-                                  ${this.selectedProvider.info.name} is connected
+                                  ${this.selectedProvider?.info?.name} is connected
                               </div>
                               <button class="tvm-connect-ui-provider-btn" @click=${disconnect}>Disconnect</button>
                           </div>
@@ -203,7 +203,7 @@ export class TvmConnectUI {
                       : html`
                             <div class="tvm-connect-ui-provider-status">
                                 <div class="tvm-connect-ui-provider-hint">
-                                    Continue in ${this.selectedProvider.info.name}
+                                    Continue in ${this.selectedProvider?.info?.name}
                                 </div>
                                 <div class="tvm-connect-ui-provider-text">Accept connection request in the wallet</div>
                             </div>
@@ -236,7 +236,7 @@ export class TvmConnectUI {
                     ? this.providerTemplate()
                     : html`
                           <div class="tvm-connect-ui-list">
-                              ${Array.from(this.tvmWallet.providers)
+                              ${this.tvmWallet?.providers && Array.from(this.tvmWallet?.providers)
                                   .sort((a, b) => (a.id === meta?.providerId ? -1 : b.id === meta?.providerId ? 1 : 0))
                                   .map(provider => this.itemTemplate(provider))}
                           </div>
@@ -245,7 +245,7 @@ export class TvmConnectUI {
         `
     }
 
-    protected tvmWallet: TvmWalletService
+    protected tvmWallet: TvmConnectService
 
     protected root: HTMLDivElement
 
@@ -302,17 +302,17 @@ export class TvmConnectUI {
             providers = paramsProviders?.length ? paramsProviders : [sparxWallet(), everWallet(), venomWallet()]
         }
 
-        this.tvmWallet = new TvmWalletService({
+        this.tvmWallet = new TvmConnectService({
             autoInit: true,
             providers,
             providerId,
         })
 
-        this.hasProvider = Object.fromEntries(this.tvmWallet.providers.map(item => [item.id, false]))
+        this.hasProvider = this.tvmWallet?.providers ? Object.fromEntries(this.tvmWallet?.providers.map(item => [item.id, false])) : {}
 
         makeAutoObservable(this, {}, { autoBind: true })
 
-        reaction(() => this.tvmWallet.providers.map(item => item.connector.provider), this.syncHasProvider, {
+        reaction(() => this.tvmWallet?.providers?.map(item => item.connector.provider), this.syncHasProvider, {
             fireImmediately: true,
         })
 
@@ -352,7 +352,7 @@ export class TvmConnectUI {
 
             const prevConnector = this.tvmWallet.connector
 
-            const provider = this.tvmWallet.providers.find(item => item.id === providerId)
+            const provider = this.tvmWallet?.providers?.find(item => item.id === providerId)
 
             if (!provider) {
                 throw new Error('Provider not founded')
@@ -361,7 +361,7 @@ export class TvmConnectUI {
             await provider.connector.connect(this.selectedNetwork)
 
             if (this.tvmWallet.providerId && providerId !== this.tvmWallet.providerId) {
-                await prevConnector?.disconnect(true)
+                await prevConnector?.disconnect({ force: true })
             }
 
             storeRecentConnectionMeta({
@@ -379,8 +379,8 @@ export class TvmConnectUI {
     }
 
     protected async syncHasProvider() {
-        const entries = await Promise.all(
-            this.tvmWallet.providers.map(async item => {
+        const entries = this.tvmWallet?.providers && await Promise.all(
+            this.tvmWallet?.providers.map(async item => {
                 try {
                     if (
                         item.connector.provider instanceof ProviderRpcClient &&
@@ -398,9 +398,11 @@ export class TvmConnectUI {
             }),
         )
 
-        runInAction(() => {
-            this.hasProvider = Object.fromEntries(entries)
-        })
+        if (entries) {
+            runInAction(() => {
+                this.hasProvider = Object.fromEntries(entries)
+            })
+        }
     }
 
     protected async syncNetworkId(): Promise<void> {
@@ -432,16 +434,16 @@ export class TvmConnectUI {
     }
 
     protected get selectedProvider(): TvmWalletProviderConfig | undefined {
-        return this.tvmWallet.providers.find(item => item.id === this.selectedProviderId)
+        return this.tvmWallet?.providers?.find(item => item.id === this.selectedProviderId)
     }
 
     protected get isInitializing(): { [providerId: string]: boolean | undefined } {
-        return Object.fromEntries(
-            this.tvmWallet.providers.map(item => [
+        return this.tvmWallet?.providers ? Object.fromEntries(
+            this.tvmWallet?.providers?.map(item => [
                 item.id,
                 item.connector.isInitializing === undefined || item.connector.isInitializing,
             ]),
-        )
+        ): {}
     }
 
     protected get balance(): string | undefined {
@@ -496,10 +498,10 @@ export class TvmConnectUI {
     connect(network?: AddNetwork) {
         this.selectedNetwork = network
 
-        if (this.tvmWallet.providers.length > 1) {
+        if (this.tvmWallet?.providers && this.tvmWallet?.providers?.length > 1) {
             this.show()
         } else {
-            const provider = this.tvmWallet.providers.at(0)
+            const provider = this.tvmWallet?.providers?.at(0)
             if (provider) {
                 if (provider.connector.provider) {
                     this.selectProvider(provider.id)
@@ -513,7 +515,7 @@ export class TvmConnectUI {
     }
 
     disconnect() {
-        this.tvmWallet.disconnect(true)
+        this.tvmWallet.disconnect({ force: true })
     }
 
     switchNetwork(params: AddNetwork): Promise<Network | null> {
