@@ -101,7 +101,7 @@
     line-height: 1;
     text-align: center;
     margin: 0 0 36px;
-    color: var(--tvm-connect-ui-text, #383838);
+    color: var(--tvm-connect-ui-text-title, #383838);
 }
 
 .tvm-connect-ui-list {
@@ -112,6 +112,7 @@
 
 .tvm-connect-ui-item {
     @include btnReset();
+    border: 1px solid var(--tvm-connect-ui-item-border, transparent);
     background: var(--tvm-connect-ui-item-bg, rgb(0 0 0/8%));
     border-radius: 8px;
     padding: 12px 18px;
