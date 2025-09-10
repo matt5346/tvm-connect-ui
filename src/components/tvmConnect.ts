@@ -15,7 +15,7 @@ import {
 import { autorun, makeAutoObservable, reaction, runInAction } from 'mobx'
 import { getUserAgent, isMobile } from '@broxus/js-utils'
 
-import { everWallet, sparxWallet, venomWallet } from './providers'
+import { everWallet, sparxWallet, venomWallet } from '../utils/providers'
 
 type Params = {
     providers?: TvmWalletProviderConfig[]

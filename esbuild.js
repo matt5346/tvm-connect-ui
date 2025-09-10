@@ -5,7 +5,7 @@ const { sassPlugin } = require('esbuild-sass-plugin')
 const { minifyTemplates, writeFiles } = require('esbuild-minify-templates')
 
 const baseTsConfig = {
-    entryPoints: ['./src/index.ts', './src/connections.ts', './src/networks.ts'],
+    entryPoints: ['./src/index.ts', './src/utils/connections.ts', './src/utils/networks.ts'],
     bundle: true,
     minify: true,
     treeShaking: true,
