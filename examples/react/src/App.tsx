@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { everscaleNetwork, everWallet, sparxWallet, TvmConnectUI, venomWallet } from '@broxus/tvm-connect-ui'
-import '@broxus/tvm-connect-ui/dist/styles.css'
+import '@broxus/tvm-connect-ui/styles.css'
 import './App.css'
 
 const tvmConnectUI = new TvmConnectUI({
-    providers: [sparxWallet, everWallet, venomWallet],
+    providers: [sparxWallet(), everWallet(), venomWallet()],
     networks: [everscaleNetwork],
 })
 

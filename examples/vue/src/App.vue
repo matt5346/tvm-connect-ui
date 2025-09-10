@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { everscaleNetwork, everWallet, sparxWallet, TvmConnectUI, venomWallet } from '@broxus/tvm-connect-ui'
-import '@broxus/tvm-connect-ui/dist/styles.css'
+import '@broxus/tvm-connect-ui/styles.css'
 
 const tvmConnectUI = new TvmConnectUI({
-    providers: [everWallet, sparxWallet, venomWallet],
+    providers: [everWallet(), sparxWallet(), venomWallet()],
     networks: [everscaleNetwork],
 })
 
